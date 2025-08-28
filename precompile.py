@@ -6,7 +6,7 @@ from np_array_on_custom_type import CustomResult, custom_result_type_instance
 
 cc = CC("precompile")
 
-@cc.export("precompile_fails", custom_result_type_instance())
+@cc.export("precompile_no_target", custom_result_type_instance())
 def precompile_no_target():
     """
     Occasionally will see a result returned but with all zeros or junk values.
