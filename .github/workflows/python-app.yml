@@ -15,7 +15,7 @@ permissions:
 jobs:
   build:
 
-    runs-on: macos-13
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -29,6 +29,6 @@ jobs:
         pip install numba setuptools
     - name: Precompile
       run: |
-        export ARCHFLAGS="-arch x86_64"
+        export ARCHFLAGS="-arch arm64"
         python -m precompile
         python -m run_precompiled
