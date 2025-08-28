@@ -28,4 +28,4 @@ jobs:
         python -m pip install --upgrade pip
         pip install numba
     - name: Run examples
-      run: python -m run_examples error
+      run: python -m run_examples
