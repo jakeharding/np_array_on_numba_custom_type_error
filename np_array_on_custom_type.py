@@ -78,7 +78,7 @@ def unbox_custom_result(typ, obj, c):
         c.pyapi.decref(an_array_obj)
         with cgutils.early_exit_if(c.builder, stack, an_array_native.is_error):
             c.builder.store(cgutils.true_bit, is_error_ptr)
-        result.cdf = an_array_native.value
+        result.an_array = an_array_native.value
     return NativeValue(result._getvalue(), is_error=c.builder.load(is_error_ptr))
 
 @box(CustomResultType)
