@@ -28,6 +28,4 @@ jobs:
         python -m pip install --upgrade pip
         pip install numba setuptools
     - name: Precompile
-      run: python -m precompile
-    - name: Run precompiled
-      run: python -m run_precompiled
+      run: python -m precompile && python -m run_precompiled
