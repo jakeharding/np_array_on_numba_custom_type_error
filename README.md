@@ -6,7 +6,6 @@ Tested using Python 3.13
 
 ```bash
 pip install numba setuptools
-python -m run_examples error
 python -m precompile
 python -m run_precompiled
 ```
