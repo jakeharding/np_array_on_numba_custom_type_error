@@ -26,8 +26,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install numba
-    - name: Run examples working
+        pip install numba setuptools
+    - name: Run examples
       run: python -m run_examples
-    - name: Run examples error
-      run: python -m run_examples error
+    - name: Precompile
+      run: python -m precompile
+    - name: Run precompiled
+      run: python -m run_precompiled

@@ -108,11 +108,15 @@ JitCustomResult = jitclass(CustomResult, custom_result_spec)
 
 
 @numba.njit
+def njit_without_jitclass():
+    """
+    Only works correctly with the JitCustomResult.
+    This will return all zeros
+    """
+    return CustomResult(np.ones(60) * 5)
+
+@numba.njit
 def njit_with_jitclass():
-    """
-    Only works with the JitCustomResult.
-    Seeing similar errors as in precompile_fails when not using JitCustomResult
-    """
     return JitCustomResult(np.ones(60) * 5)
 
 
@@ -122,5 +126,5 @@ def njit_fill_target(target_array):
     Passing in a target array to fill works.
     """
     target_array.fill(np.ones(60))
-    return CustomResult(target_array)
+    return JitCustomResult(target_array)
 
