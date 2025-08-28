@@ -95,7 +95,6 @@ def box_custom_result(typ, val, c):
         with cgutils.early_exit_if_null(c.builder, stack, class_obj):
             c.pyapi.decref(an_array_obj)
             c.builder.store(fail_obj, ret_ptr)
-        # result = cgutils.create_constant_array() #????
         res = c.pyapi.call_function_objargs(class_obj, (an_array_obj,))
         c.pyapi.decref(an_array_obj)
         c.builder.store(res, ret_ptr)
