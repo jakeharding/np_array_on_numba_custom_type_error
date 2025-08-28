@@ -4,6 +4,7 @@ import numba
 import numpy as np
 import numpy.typing as npt
 from numba import types
+from numba.experimental import jitclass
 from numba.extending import (
     type_callable,
     as_numba_type,
@@ -100,12 +101,17 @@ def box_custom_result(typ, val, c):
         c.builder.store(res, ret_ptr)
     return c.builder.load(ret_ptr)
 
+custom_result_spec = [
+    ('an_array', types.float64[:]),  # NumPy array of float64
+]
+JitCustomResult = jitclass(CustomResult, custom_result_spec)
+
 
 @numba.njit
 def error_example() -> CustomResult:
-    return CustomResult(np.ones(60))
+    return JitCustomResult(np.ones(60) * 5)
 
 @numba.njit
 def works_example(target_array):
     target_array.fill(np.ones(60))
-    return CustomResult(target_array)
+    return JitCustomResult(target_array)
