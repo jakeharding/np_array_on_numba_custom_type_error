@@ -108,10 +108,19 @@ JitCustomResult = jitclass(CustomResult, custom_result_spec)
 
 
 @numba.njit
-def error_example() -> CustomResult:
+def njit_with_jitclass():
+    """
+    Only works with the JitCustomResult.
+    Seeing similar errors as in precompile_fails when not using JitCustomResult
+    """
     return JitCustomResult(np.ones(60) * 5)
 
+
 @numba.njit
-def works_example(target_array):
+def njit_fill_target(target_array):
+    """
+    Passing in a target array to fill works.
+    """
     target_array.fill(np.ones(60))
-    return JitCustomResult(target_array)
+    return CustomResult(target_array)
+
