@@ -55,6 +55,7 @@ def custom_result_impl(context, builder, sig, args):
     an_array = args[0]
     result = cgutils.create_struct_proxy(sig.return_type)(context, builder)
     result.an_array = an_array
+    context.nrt.incref(builder, sig.args[0], an_array)
     return result._getvalue()
 
 
@@ -98,6 +99,9 @@ def box_custom_result(typ, val, c):
             c.builder.store(fail_obj, ret_ptr)
         res = c.pyapi.call_function_objargs(class_obj, (an_array_obj,))
         c.pyapi.decref(an_array_obj)
+        # c.context.nrt.incref(builder, typ, val)
+        # c.context.nrt.incref(c.builder, custom_result_type_instance, class_obj)
+
         c.builder.store(res, ret_ptr)
     return c.builder.load(ret_ptr)
 
